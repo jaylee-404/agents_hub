@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+
+  backend:
+    build: ./backend
+    command: ./bin/dev
+    volumes:
+      - ./backend:/rails
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/agents_hub_development
+      AGENT_SERVICE_URL: http://agent:8000
+    depends_on:
+      - db
+
+  agent:
+    build: ./agent
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./agent:/app
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    command: npm run dev -- --host
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
