@@ -22,7 +22,12 @@ default: &default
 
 development:
   <<: *default
-  database: backend_development
+#  database: backend_development
+  adapter: postgresql
+  encoding: unicode
+  # 这一行是灵魂：直接从环境变量读取
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.

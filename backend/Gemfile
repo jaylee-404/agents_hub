@@ -30,6 +30,13 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+gem "bcrypt"                # 用于 has_secure_password
+gem "jwt"              # JWT 处理
+gem "sidekiq"
+gem "redis"
+gem "active_model_serializers" # 可选，用于格式化 JSON 输出
+gem "httparty"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 

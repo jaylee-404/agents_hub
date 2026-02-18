@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  status: 1
+  task_type: MyString
+  payload: 
+  result: 
+  stream_token: MyString
+
+two:
+  user: two
+  status: 1
+  task_type: MyString
+  payload: 
+  result: 
+  stream_token: MyString
