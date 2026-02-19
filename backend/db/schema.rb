@@ -10,17 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_18_094550) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_19_180916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "tasks", force: :cascade do |t|
+    t.text "content"
     t.datetime "created_at", null: false
+    t.string "document_urls", default: [], array: true
+    t.string "image_urls", default: [], array: true
     t.jsonb "payload"
     t.jsonb "result"
     t.integer "status"
     t.string "stream_token"
     t.string "task_type"
+    t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["stream_token"], name: "index_tasks_on_stream_token", unique: true
