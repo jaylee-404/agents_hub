@@ -1,18 +1,22 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthToken } from '@/store/use-auth-store';
+import LoginPage from '@/features/auth/login-page';
+
 export default function App() {
+    const token = useAuthToken();
+
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-                <h1 className="text-3xl font-bold text-slate-900">
-                    Agents Hub <span className="text-blue-600">v1.0</span>
-                </h1>
-                <p className="mt-2 text-slate-500">
-                    前端基础框架已搭建完成（Tailwind v3.4.13 + Vite）
-                </p>
-                <div className="mt-6 flex gap-2">
-                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <span className="text-xs font-mono text-slate-400">Environment: Stable</span>
-                </div>
-            </div>
-        </div>
-    )
+        <BrowserRouter>
+            <Routes>
+                <Route path="/login" element={!token ? <LoginPage /> : <Navigate to="/" />} />
+
+                {/* 受保护的主页 */}
+                <Route path="/" element={token ? (
+                    <div className="p-10 text-center">
+                        <h1 className="text-2xl font-bold">登录成功，欢迎来到 Agents Hub 核心控制台</h1>
+                    </div>
+                ) : <Navigate to="/login" />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }

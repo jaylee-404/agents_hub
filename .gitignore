@@ -83,3 +83,5 @@ agent/*.egg-info
 agent/.venv
 agent/chroma_db/
 agent/.idea
+
+.idea
