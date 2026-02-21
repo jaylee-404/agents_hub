@@ -1,6 +1,6 @@
 # 使用官方预装好浏览器的基础镜像（注意版本号要和你的 Playwright 匹配）
 FROM mcr.microsoft.com/playwright/python:v1.49.0-noble
-FROM python:3.12-slim
+#FROM python:3.12-slim
 
 # 1. 安装 uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/

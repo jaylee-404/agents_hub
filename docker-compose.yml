@@ -57,6 +57,7 @@ services:
       - PYTHONPATH=/app
     volumes:
       - ./agent:/app
+      - /app/.venv  # 💡 强制保护容器内由 uv 生成的虚拟环境
     ports:
       - "8000:8000"
     env_file: .env
